@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HeadsUp SA Business Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="sa-map.js"></script>
+</head>
+<body>
+    <div class="header">
+        <img src="assets/headsup_logo.png" alt="HeadsUp Logo">
+        <h1>South Africa Business Intelligence Dashboard</h1>
+    </div>
+    
+    <div class="row">
+        <!-- Subscriber Growth Chart -->
+        <div class="chart" id="growthChart"></div>
+        
+        <!-- SA Provincial Revenue Map -->
+        <div class="chart" id="saMap"></div>
+    </div>
+    
+    <div class="row">
+        <!-- Business Tier Distribution -->
+        <div class="chart" id="tierChart"></div>
+        
+        <!-- Viral Content Performance -->
+        <div class="chart" id="contentChart"></div>
+    </div>
+    
+    <script>
+        // Sample data - replace with live API in production
+        const growthData = {
+            x: ['Week 1', 'Week 2', 'Month 1', 'Month 3', 'Month 6'],
+            y: [20, 50, 250, 600, 1000],
+            type: 'scatter',
+            name: 'Subscribers'
+        };
+        
+        Plotly.newPlot('growthChart', [growthData], {
+            title: 'Subscriber Growth Target: 1,000 by Month 6',
+            xaxis: {title: 'Timeline'},
+            yaxis: {title: 'Active Users'}
+        });
+        
+        // SA Provincial Revenue
+        const mapData = [{
+            type: 'choropleth',
+            locations: ['ZA-GT', 'ZA-WC', 'ZA-KZN', 'ZA-EC', 'ZA-FS'],
+            z: [89500, 67250, 44180, 30700, 18950],
+            geojson: southAfricaGeoJSON,
+            colorscale: 'Reds',
+            name: 'Revenue (R)'
+        }];
+        
+        Plotly.newPlot('saMap', mapData, {
+            title: 'Revenue by Province',
+            geo: {scope: 'africa', center: {lon: 25, lat: -29}, zoom: 4}
+        });
+    </script>
+</body>
+</html>
