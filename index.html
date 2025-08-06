@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeadsUp SA Business Intelligence Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="sa-map.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header Section -->
+        <header class="dashboard-header">
+            <div class="logo-container">
+                <img src="assets/headsup_logo.png" alt="HeadsUp Logo" class="logo">
+                <h1>HeadsUp South Africa - Business Intelligence Dashboard</h1>
+            </div>
+            <div class="live-stats">
+                <div class="stat-box">
+                    <span class="stat-label">Total Revenue</span>
+                    <span class="stat-value" id="revenue">R 189,560</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Active Users</span>
+                    <span class="stat-value" id="users">428</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Growth Rate</span>
+                    <span class="stat-value" id="growth">+18.7%</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="dashboard-grid">
+            <!-- Growth Trajectory Chart -->
+            <div class="chart-container full-width">
+                <h2>Subscriber Growth Trajectory</h2>
+                <div id="growthChart"></div>
+            </div>
+            
+            <!-- SA Revenue Map -->
+            <div class="chart-container">
+                <h2>Revenue by Province</h2>
+                <div id="saMap"></div>
+            </div>
+            
+            <!-- Business Tier Distribution -->
+            <div class="chart-container">
+                <h2>Business Tier Distribution</h2>
+                <div id="tierChart"></div>
+            </div>
+            
+            <!-- Content Performance -->
+            <div class="chart-container">
+                <h2>Content Performance</h2>
+                <div id="contentChart"></div>
+            </div>
+            
+            <!-- Real-Time Scan Demo -->
+            <div class="chart-container full-width">
+                <h2>How HeadsUp Works - Live Demo</h2>
+                <div class="demo-container">
+                    <div class="demo-step">
+                        <div class="scan-animation"></div>
+                        <p>1. Scan Receipt</p>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-step">
+                        <div class="price-comparison">
+                            <p>Checkers: R45</p>
+                            <p>Pick n Pay: R39</p>
+                            <p class="best-price">Makro: R37</p>
+                        </div>
+                        <p>2. Price Comparison</p>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-step">
+                        <div class="savings-badge">
+                            <p>SAVED</p>
+                            <p>R18 (23%)</p>
+                        </div>
+                        <p>3. Instant Savings</p>
+                    </div>
+                </div>
+                <button class="demo-button">Try Live Demo</button>
+            </div>
+        </main>
+
+        <!-- Footer with Timeline -->
+        <footer class="timeline">
+            <h3>Growth Timeline</h3>
+            <div class="timeline-steps">
+                <div class="timeline-step active">
+                    <div class="timeline-dot"></div>
+                    <p>Week 1: 20 Subs</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <p>Week 2: 50 Subs</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <p>Month 1: 250 Subs</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <p>Month 3: 600 Subs</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <p>Month 6: 1000+ Subs</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
