@@ -1,34 +1,30 @@
-from moviepy.editor import ImageClip, concatenate_videoclips
-import textwrap
-import requests
+# ... (previous imports)
+from scanner_agent.price_comparator import compare_prices
 
-def generate_content(platform, business_tier, language="English"):
-    """Creates 15-sec demo videos/GIFs showing receipt scanning"""
-    # Step 1: Simulate receipt scanning
-    scan_visual = ImageClip("assets/sample_receipt.jpg").set_duration(3)
+# ... (existing functions)
+
+def generate_comparison_content(report):
+    """Create visual content based on price comparison"""
+    # Create comparison graphic
+    comp_text = "\n".join([f"{r['retailer']}: R{r['price']}" 
+                          for r in report['retailers'][:3])
     
-    # Step 2: Show competitor price comparison
-    comparison_screen = (ImageClip("assets/comparison_template.png")
-                        .set_duration(5)
-                        .text("Spar: R45\nCheckers: R39\nMakro: R37", 
-                              fontsize=24, color='white'))
+    # Generate visual
+    img = Image.new('RGB', (800, 600), color='white')
+    d = ImageDraw.Draw(img)
     
-    # Step 3: Add savings calculation
-    savings_frame = (ImageClip("assets/savings_bg.png")
-                    .set_duration(4)
-                    .text(f"Save 23% | R18 back!", 
-                          fontsize=30, color='green'))
+    # Add product title
+    d.text((50, 50), f"Price Comparison: {report['product']}", fill='black', font=font_large)
     
-    # Step 4: Localized messaging
-    messages = {
-        "SMB": "Spaza shops: Never overpay again!",
-        "Medium": "Optimize business purchases",
-        "Enterprise": "Global procurement intelligence"
-    }
-    caption = textwrap.fill(messages[business_tier], width=30)
+    # Add price comparison
+    d.text((50, 150), f"Your Price: R{report['your_price']}", fill='red', font=font_medium)
+    d.text((50, 200), "Competitor Prices:", fill='black', font=font_medium)
+    d.text((70, 250), comp_text, fill='black', font=font_small)
     
-    # Compile video
-    final_clip = concatenate_videoclips([scan_visual, comparison_screen, savings_frame])
-    final_clip.write_videofile(f"{platform}_demo.mp4", fps=24)
+    # Add savings
+    d.text((50, 400), f"Potential Savings: R{report['potential_savings']}", 
+           fill='green', font=font_large)
     
-    return f"{platform}_demo.mp4"
+    # Save and return
+    img.save(f"comparison_{report['product']}.png")
+    return img
