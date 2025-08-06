@@ -1,62 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HeadsUp SA Business Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="sa-map.js"></script>
-</head>
-<body>
-    <div class="header">
-        <img src="assets/headsup_logo.png" alt="HeadsUp Logo">
-        <h1>South Africa Business Intelligence Dashboard</h1>
-    </div>
+import random
+
+# Simulated growth trajectory
+GROWTH_TARGETS = {
+    "week1": 20,
+    "week2": 50,
+    "month1": 250,
+    "month3": 600,
+    "month6": 1000
+}
+
+def track_targets():
+    """Simulates subscriber growth - replace with database in production"""
+    # Current week simulation (accelerated growth)
+    current_week = 2
+    base_subscribers = 38  # Week 1 achievement
     
-    <div class="row">
-        <!-- Subscriber Growth Chart -->
-        <div class="chart" id="growthChart"></div>
-        
-        <!-- SA Provincial Revenue Map -->
-        <div class="chart" id="saMap"></div>
-    </div>
+    # Simulate viral growth factors
+    viral_factor = random.uniform(1.2, 3.0)  # Content virality
+    referral_bump = random.randint(5, 15)    # Stokvel referrals
     
-    <div class="row">
-        <!-- Business Tier Distribution -->
-        <div class="chart" id="tierChart"></div>
-        
-        <!-- Viral Content Performance -->
-        <div class="chart" id="contentChart"></div>
-    </div>
-    
-    <script>
-        // Sample data - replace with live API in production
-        const growthData = {
-            x: ['Week 1', 'Week 2', 'Month 1', 'Month 3', 'Month 6'],
-            y: [20, 50, 250, 600, 1000],
-            type: 'scatter',
-            name: 'Subscribers'
-        };
-        
-        Plotly.newPlot('growthChart', [growthData], {
-            title: 'Subscriber Growth Target: 1,000 by Month 6',
-            xaxis: {title: 'Timeline'},
-            yaxis: {title: 'Active Users'}
-        });
-        
-        // SA Provincial Revenue
-        const mapData = [{
-            type: 'choropleth',
-            locations: ['ZA-GT', 'ZA-WC', 'ZA-KZN', 'ZA-EC', 'ZA-FS'],
-            z: [89500, 67250, 44180, 30700, 18950],
-            geojson: southAfricaGeoJSON,
-            colorscale: 'Reds',
-            name: 'Revenue (R)'
-        }];
-        
-        Plotly.newPlot('saMap', mapData, {
-            title: 'Revenue by Province',
-            geo: {scope: 'africa', center: {lon: 25, lat: -29}, zoom: 4}
-        });
-    </script>
-</body>
-</html>
+    current_subs = int(base_subscribers * viral_factor) + referral_bump
+    return min(current_subs, GROWTH_TARGETS['week2'])
