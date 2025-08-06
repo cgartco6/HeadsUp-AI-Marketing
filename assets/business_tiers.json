@@ -1,1 +1,20 @@
-bla
+{
+    "smb": {
+        "scan_limit": 50,
+        "price": 495,
+        "competitor_tracking": "local",
+        "support": "WhatsApp bot"
+    },
+    "medium": {
+        "scan_limit": 500,
+        "price": 1895,
+        "competitor_tracking": "provincial",
+        "support": "Dedicated SA agent"
+    },
+    "enterprise": {
+        "scan_limit": "unlimited",
+        "price": "custom",
+        "competitor_tracking": "national_international",
+        "support": "24/7 engineering"
+    }
+}
