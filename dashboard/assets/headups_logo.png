@@ -1,8 +1,26 @@
-/dashboard
-  ├── index.html
-  ├── style.css
-  ├── sa-map.js
-  ├── data.js
-  ├── dashboard.js
-  └── assets/
-       └── headsup_logo.png
+# HeadsUp AI Marketing Agent
+
+A zero-cost, self-sufficient marketing system for HeadsUp, targeting South African businesses. Features include automated content creation, social media posting, growth tracking, and a visual dashboard.
+
+## Repository Structure
+4. `README.md` (as above)
+
+But note: the `content_creator.py` expects `assets/sample_receipt.jpg` to exist. So if the user does not add it, the script will fail. We can add a check in the code? Let's adjust `content_creator.py`:
+
+```python
+import os
+
+# ...
+
+def generate_content(platform, business_tier, language="English"):
+    """Creates 15-sec demo videos/GIFs showing receipt scanning"""
+    # Check if sample receipt exists
+    receipt_path = "assets/sample_receipt.jpg"
+    if not os.path.exists(receipt_path):
+        # Use a placeholder image
+        receipt_path = "https://via.placeholder.com/400x200?text=Add+Your+Receipt+Image"
+    
+    # Step 1: Simulate receipt scanning
+    scan_visual = ImageClip(receipt_path).set_duration(3)
+    
+    # ... rest of the code ...
